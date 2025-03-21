@@ -1,5 +1,4 @@
-<h1>AORA aptitude-web
-<ul>
+<h1>AORA aptitude-web</h1>
 <li>Amruta
 <li>Roshan
 <li>Arya
@@ -15,7 +14,7 @@ step 3: Copy below commands one by one<br>
 step 4: (skip if not required) complete tailwind css setup from 'https://v3.tailwindcss.com/docs/guides/create-react-app'<br>
 step 5: npm start<br>
 step 6: Done<br>
-<h2>Or
-step 2: Run install.bat
+<h2>Or<br>
+step 2: Run install.bat<br>
 step 3: npm start<br>
 step 4: Done<br>
