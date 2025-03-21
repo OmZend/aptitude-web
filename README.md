@@ -1,5 +1,5 @@
 <h1>AORA aptitude-web</h1>
-<h2>Members</h2>
+<bold>Members:</bold>
 <li>Amruta
 <li>Roshan
 <li>Arya
