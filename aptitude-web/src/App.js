@@ -1,28 +1,29 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Sidebar from "./components/Sidebar";
-import Quantitative from "./pages/Quantitative";
-import Logical from "./pages/Logical";
-import Verbal from "./pages/Verbal";
-import DataInterpretation from "./pages/DataInterpretation";
-import GeneralKnowledge from "./pages/GeneralKnowledge";
+import React from 'react';
+import Navbar from './components/layout/Navbar';
+import Sidebar from './components/layout/Sidebar';
+import Footer from './components/layout/Footer';
+import HeroSection from './components/home/HeroSection';
+import CategoriesGrid from './components/home/CategoriesGrid';
+import StatsSection from './components/home/StatsSection';
+import { categories, sidebarLinks } from './data/mockData';
 
 const App = () => {
   return (
-    <Router>
-      <div style={{ display: "flex" }}>
-        <Sidebar />
-        <div style={{ marginLeft: "260px", padding: "20px", flex: 1 }}>
-          <Routes>
-            <Route path="/quantitative" element={<Quantitative />} />
-            <Route path="/logical" element={<Logical />} />
-            <Route path="/verbal" element={<Verbal />} />
-            <Route path="/data-interpretation" element={<DataInterpretation />} />
-            <Route path="/general-knowledge" element={<GeneralKnowledge />} />
-          </Routes>
+    <div className="min-h-screen flex flex-col bg-gray-100">
+      <Navbar />
+      
+      <div className="container mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
+        <Sidebar links={sidebarLinks} />
+        
+        <div className="flex-1">
+          <HeroSection />
+          <h2 className="text-xl font-semibold text-slate-800 mb-4">Popular Categories</h2>
+          <CategoriesGrid categories={categories} />
+          <StatsSection />
         </div>
       </div>
-    </Router>
+      <Footer />
+    </div>
   );
 };
 
