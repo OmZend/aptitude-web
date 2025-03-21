@@ -1,4 +1,4 @@
-<h1>AORA aptitude-web<h1>
+<h1>AORA aptitude-web
 <ul>
 <li>Amruta
 <li>Roshan
