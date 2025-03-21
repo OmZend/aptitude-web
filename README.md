@@ -4,7 +4,7 @@
 <li>Arya
 <li>Om
 <br>
-<h3>How to implement Front End:</h3><br>
+<h3>How to implement Front End:</h3>
 step 1: git clone 'https://github.com/OmZend/aptitude-web.git'<br>
 step 2: Run install.bat<br>
 step 3: npm start<br>
