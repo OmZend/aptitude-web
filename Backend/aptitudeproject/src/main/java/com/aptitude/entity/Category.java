@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "categories") // optional, but nice
-public class Categories {
+public class Category {
 
     @Id
     @Column(name = "category_id")
@@ -16,15 +16,14 @@ public class Categories {
     @Column(name = "category_name", nullable = false)
     private String categoryName;
 
-    @Column(name = "description")
     private String description;
 
     // No-arg constructor (important for JPA)
-    public Categories() {
+    public Category() {
     }
 
     // All-args constructor
-    public Categories(int categoryId, String categoryName, String description) {
+    public Category(int categoryId, String categoryName, String description) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
         this.description = description;

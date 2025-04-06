@@ -7,7 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "questions")
-public class Questions {
+public class Question {
 
     @Id
     @Column(name = "question_id")
@@ -16,7 +16,7 @@ public class Questions {
     @Column(name = "category_id", nullable = false)
     private int categoryId;
 
-    @Column(name = "question_text", nullable = false, length = 1000)
+    @Column(name = "question_text", nullable = false)
     private String questionText;
 
     @Column(name = "option_a", nullable = false)
@@ -38,11 +38,11 @@ public class Questions {
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
-    public Questions() {
+    public Question() {
         
     }
 
-    public Questions(int questionId, int categoryId, String questionText, String optionA, String optionB,
+    public Question(int questionId, int categoryId, String questionText, String optionA, String optionB,
                      String optionC, String optionD, String correctOption, LocalDateTime createdAt) {
         this.questionId = questionId;
         this.categoryId = categoryId;
@@ -54,8 +54,6 @@ public class Questions {
         this.correctOption = correctOption;
         this.createdAt = createdAt;
     }
-
-    // Getters and Setters
 
     public int getQuestionId() {
         return questionId;

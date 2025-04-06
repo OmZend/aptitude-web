@@ -3,8 +3,8 @@ package com.aptitude.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.aptitude.entity.Questions;
+import com.aptitude.entity.Question;
 @Repository
-public interface QuestionsRepository extends JpaRepository<Questions, Integer>{
+public interface QuestionRepository extends JpaRepository<Question, Integer>{
 
 }
