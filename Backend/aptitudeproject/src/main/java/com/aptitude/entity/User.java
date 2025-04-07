@@ -11,7 +11,7 @@ public class User {
 
     @Id
     @Column(name = "user_id")
-    private int userId;
+    private long userId;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -33,64 +33,67 @@ public class User {
     	
     }
 
-    public User(int userId, String name, String email, String password, String role, LocalDateTime createdAt) {
-        this.userId = userId;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-        this.createdAt = createdAt;
-    }
-    public int getUserId() {
-        return userId;
-    }
+	public User(long userId, String name, String email, String password, String role, LocalDateTime createdAt) {
+		super();
+		this.userId = userId;
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.role = role;
+		this.createdAt = createdAt;
+	}
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+	public long getUserId() {
+		return userId;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public String getRole() {
-        return role;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+	public String getRole() {
+		return role;
+	}
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+	public void setRole(String role) {
+		this.role = role;
+	}
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
 
-    @Override
-    public String toString() {
-        return "Users [userId=" + userId + ", name=" + name + ", email=" + email + ", role=" + role + ", createdAt=" + createdAt + "]";
-    }
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", name=" + name + ", email=" + email + ", password=" + password + ", role="
+				+ role + ", createdAt=" + createdAt + "]";
+	}
 }

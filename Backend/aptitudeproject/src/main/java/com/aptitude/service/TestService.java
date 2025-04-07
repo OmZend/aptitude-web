@@ -21,10 +21,10 @@ public class TestService {
         return testRepository.findAll();
     }
 
-    public Optional<Test> getTestById(int testId) {
+    public Optional<Test> getTestById(long testId) {
         return testRepository.findById(testId);
     }
-    public Test updateTest(int id, Test updatedTest) {
+    public Test updateTest(long id, Test updatedTest) {
         return testRepository.findById(id).map(test -> {
             test.setTestName(updatedTest.getTestName());
             test.setTotalQuestions(updatedTest.getTotalQuestions());
@@ -33,7 +33,7 @@ public class TestService {
             return testRepository.save(test);
         }).orElse(null);
     }
-    public void deleteTest(int testId) {
+    public void deleteTest(long testId) {
         testRepository.deleteById(testId);
     }
 }

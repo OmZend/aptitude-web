@@ -15,14 +15,15 @@ public class UserTest {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int attemptId;
+	private long attemptId;
 
-	private int userId;
-	private int testId;
+	private long userId;
+	private long testId;
 	private double score;
+	@Column(name = "accuracy", precision = 5)
 	private double accuracy;
 	private String status;
-	
+
 	@UpdateTimestamp
 	@Column(name = "attempted_at")
 	private LocalDateTime attemptedAt;
@@ -30,8 +31,9 @@ public class UserTest {
 	public UserTest() {
 	}
 
-	public UserTest(int attemptId, int userId, int testId, double score, double accuracy, String status,
+	public UserTest(long attemptId, long userId, long testId, double score, double accuracy, String status,
 			LocalDateTime attemptedAt) {
+		super();
 		this.attemptId = attemptId;
 		this.userId = userId;
 		this.testId = testId;
@@ -41,27 +43,27 @@ public class UserTest {
 		this.attemptedAt = attemptedAt;
 	}
 
-	public int getAttemptId() {
+	public long getAttemptId() {
 		return attemptId;
 	}
 
-	public void setAttemptId(int attemptId) {
+	public void setAttemptId(long attemptId) {
 		this.attemptId = attemptId;
 	}
 
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 
-	public int getTestId() {
+	public long getTestId() {
 		return testId;
 	}
 
-	public void setTestId(int testId) {
+	public void setTestId(long testId) {
 		this.testId = testId;
 	}
 
@@ -102,4 +104,5 @@ public class UserTest {
 		return "UserTest [attemptId=" + attemptId + ", userId=" + userId + ", testId=" + testId + ", score=" + score
 				+ ", accuracy=" + accuracy + ", status=" + status + ", attemptedAt=" + attemptedAt + "]";
 	}
+
 }

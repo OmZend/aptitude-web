@@ -15,11 +15,11 @@ public class Test {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int testId;
+    private long testId;
     
     private String testName;
     
-    private int categoryId;
+    private long categoryId;
     
     private int totalQuestions;
     
@@ -36,22 +36,23 @@ public class Test {
     public Test() {
     }
 
-    public Test(int testId, String testName, int categoryId, int totalQuestions, int timeLimit, int createdBy,
-            LocalDateTime createdAt) {
-        this.testId = testId;
-        this.testName = testName;
-        this.categoryId = categoryId;
-        this.totalQuestions = totalQuestions;
-        this.timeLimit = timeLimit;
-        this.createdBy = createdBy;
-        this.createdAt = createdAt;
-    }
+	public Test(long testId, String testName, long categoryId, int totalQuestions, int timeLimit, int createdBy,
+			LocalDateTime createdAt) {
+		super();
+		this.testId = testId;
+		this.testName = testName;
+		this.categoryId = categoryId;
+		this.totalQuestions = totalQuestions;
+		this.timeLimit = timeLimit;
+		this.createdBy = createdBy;
+		this.createdAt = createdAt;
+	}
 
-	public int getTestId() {
+	public long getTestId() {
 		return testId;
 	}
 
-	public void setTestId(int testId) {
+	public void setTestId(long testId) {
 		this.testId = testId;
 	}
 
@@ -63,11 +64,11 @@ public class Test {
 		this.testName = testName;
 	}
 
-	public int getCategoryId() {
+	public long getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(int categoryId) {
+	public void setCategoryId(long categoryId) {
 		this.categoryId = categoryId;
 	}
 
@@ -108,7 +109,5 @@ public class Test {
 		return "Test [testId=" + testId + ", testName=" + testName + ", categoryId=" + categoryId + ", totalQuestions="
 				+ totalQuestions + ", timeLimit=" + timeLimit + ", createdBy=" + createdBy + ", createdAt=" + createdAt
 				+ "]";
-	}
-    
-    
+	}   
 }

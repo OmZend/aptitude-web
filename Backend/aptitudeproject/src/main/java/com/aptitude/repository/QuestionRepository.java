@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.aptitude.entity.Question;
 @Repository
-public interface QuestionRepository extends JpaRepository<Question, Integer>{
+public interface QuestionRepository extends JpaRepository<Question, Long>{
 
 }

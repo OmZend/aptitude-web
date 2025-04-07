@@ -21,17 +21,17 @@ public class UserAnswerService {
         return userAnswerRepository.findAll();
     }
 
-    public Optional<UserAnswer> getUserAnswerById(int answerId) {
+    public Optional<UserAnswer> getUserAnswerById(long answerId) {
         return userAnswerRepository.findById(answerId);
     }
-    public UserAnswer updateUserAnswer(int id, UserAnswer updatedUserAnswer) {
+    public UserAnswer updateUserAnswer(long id, UserAnswer updatedUserAnswer) {
         return userAnswerRepository.findById(id).map(userAnswer -> {
             userAnswer.setSelectedOption(updatedUserAnswer.getSelectedOption());
             userAnswer.setIsCorrect(updatedUserAnswer.getIsCorrect());
             return userAnswerRepository.save(userAnswer);
         }).orElse(null);
     }
-    public void deleteUserAnswer(int answerId) {
+    public void deleteUserAnswer(long answerId) {
         userAnswerRepository.deleteById(answerId);
     }
 }

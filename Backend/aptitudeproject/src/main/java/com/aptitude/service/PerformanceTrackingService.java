@@ -21,10 +21,10 @@ public class PerformanceTrackingService {
         return performanceTrackingRepository.findAll();
     }
 
-    public Optional<PerformanceTracking> getTrackingById(int trackingId) {
+    public Optional<PerformanceTracking> getTrackingById(long trackingId) {
         return performanceTrackingRepository.findById(trackingId);
     }
-    public PerformanceTracking updateTracking(int id, PerformanceTracking updatedTracking) {
+    public PerformanceTracking updateTracking(long id, PerformanceTracking updatedTracking) {
         return performanceTrackingRepository.findById(id).map(tracking -> {
             tracking.setTotalAttempts(updatedTracking.getTotalAttempts());
             tracking.setTotalCorrect(updatedTracking.getTotalCorrect());
@@ -32,7 +32,7 @@ public class PerformanceTrackingService {
         }).orElse(null);
     }
 
-    public void deleteTracking(int trackingId) {
+    public void deleteTracking(long trackingId) {
         performanceTrackingRepository.deleteById(trackingId);
     }
 }

@@ -12,21 +12,21 @@ public class PerformanceTracking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tracking_id")
-    private int trackingId;
+    private long trackingId;
 
     @Column(name = "user_id", nullable = false)
-    private int userId;
+    private long userId;
 
     @Column(name = "category_id", nullable = false)
-    private int categoryId;
+    private long categoryId;
 
     @Column(name = "total_attempts", nullable = false)
-    private int totalAttempts = 0;
+    private long totalAttempts = 0;
 
     @Column(name = "total_correct", nullable = false)
     private int totalCorrect = 0;
 
-    @Column(name = "accuracy", precision = 5, scale = 2)
+    @Column(name = "accuracy", precision = 5)
     private Double accuracy;
     
     @UpdateTimestamp
@@ -36,77 +36,80 @@ public class PerformanceTracking {
     public PerformanceTracking() {
     }
 
-    public PerformanceTracking(int trackingId, int userId, int categoryId, int totalAttempts,
-                                int totalCorrect, Double accuracy, LocalDateTime lastAttempted) {
-        this.trackingId = trackingId;
-        this.userId = userId;
-        this.categoryId = categoryId;
-        this.totalAttempts = totalAttempts;
-        this.totalCorrect = totalCorrect;
-        this.accuracy = accuracy;
-        this.lastAttempted = lastAttempted;
-    }
+	public PerformanceTracking(long trackingId, long userId, long categoryId, long totalAttempts, int totalCorrect,
+			Double accuracy, LocalDateTime lastAttempted) {
+		super();
+		this.trackingId = trackingId;
+		this.userId = userId;
+		this.categoryId = categoryId;
+		this.totalAttempts = totalAttempts;
+		this.totalCorrect = totalCorrect;
+		this.accuracy = accuracy;
+		this.lastAttempted = lastAttempted;
+	}
 
-    public int getTrackingId() {
-        return trackingId;
-    }
+	public long getTrackingId() {
+		return trackingId;
+	}
 
-    public void setTrackingId(int trackingId) {
-        this.trackingId = trackingId;
-    }
+	public void setTrackingId(long trackingId) {
+		this.trackingId = trackingId;
+	}
 
-    public int getUserId() {
-        return userId;
-    }
+	public long getUserId() {
+		return userId;
+	}
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
 
-    public int getCategoryId() {
-        return categoryId;
-    }
+	public long getCategoryId() {
+		return categoryId;
+	}
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
+	public void setCategoryId(long categoryId) {
+		this.categoryId = categoryId;
+	}
 
-    public int getTotalAttempts() {
-        return totalAttempts;
-    }
+	public long getTotalAttempts() {
+		return totalAttempts;
+	}
 
-    public void setTotalAttempts(int totalAttempts) {
-        this.totalAttempts = totalAttempts;
-    }
+	public void setTotalAttempts(long totalAttempts) {
+		this.totalAttempts = totalAttempts;
+	}
 
-    public int getTotalCorrect() {
-        return totalCorrect;
-    }
+	public int getTotalCorrect() {
+		return totalCorrect;
+	}
 
-    public void setTotalCorrect(int totalCorrect) {
-        this.totalCorrect = totalCorrect;
-    }
+	public void setTotalCorrect(int totalCorrect) {
+		this.totalCorrect = totalCorrect;
+	}
 
-    public Double getAccuracy() {
-        return accuracy;
-    }
+	public Double getAccuracy() {
+		return accuracy;
+	}
 
-    public void setAccuracy(Double accuracy) {
-        this.accuracy = accuracy;
-    }
+	public void setAccuracy(Double accuracy) {
+		this.accuracy = accuracy;
+	}
 
-//    public LocalDateTime getLastAttempted() {
-//        return lastAttempted;
-//    }
-//
-//    public void setLastAttempted(LocalDateTime lastAttempted) {
-//        this.lastAttempted = lastAttempted;
-//    }
+	public LocalDateTime getLastAttempted() {
+		return lastAttempted;
+	}
 
-    @Override
-    public String toString() {
-        return "PerformanceTracking [trackingId=" + trackingId + ", userId=" + userId + ", categoryId=" + categoryId
-                + ", totalAttempts=" + totalAttempts + ", totalCorrect=" + totalCorrect + ", accuracy=" + accuracy
-                + ", lastAttempted=" + lastAttempted + "]";
-    }
+	public void setLastAttempted(LocalDateTime lastAttempted) {
+		this.lastAttempted = lastAttempted;
+	}
+
+	@Override
+	public String toString() {
+		return "PerformanceTracking [trackingId=" + trackingId + ", userId=" + userId + ", categoryId=" + categoryId
+				+ ", totalAttempts=" + totalAttempts + ", totalCorrect=" + totalCorrect + ", accuracy=" + accuracy
+				+ ", lastAttempted=" + lastAttempted + "]";
+	}
+
+    
 }

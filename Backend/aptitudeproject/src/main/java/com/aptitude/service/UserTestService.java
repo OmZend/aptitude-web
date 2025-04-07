@@ -21,10 +21,10 @@ public class UserTestService {
         return userTestRepository.findAll();
     }
 
-    public Optional<UserTest> getUserTestById(int attemptId) {
+    public Optional<UserTest> getUserTestById(long attemptId) {
         return userTestRepository.findById(attemptId);
     }
-    public UserTest updateUserTest(int id, UserTest updatedUserTest) {
+    public UserTest updateUserTest(long id, UserTest updatedUserTest) {
         return userTestRepository.findById(id).map(userTest -> {
             userTest.setScore(updatedUserTest.getScore());
             userTest.setAccuracy(updatedUserTest.getAccuracy());
@@ -33,7 +33,7 @@ public class UserTestService {
         }).orElse(null);
     }
     
-    public void deleteUserTest(int attemptId) {
+    public void deleteUserTest(long attemptId) {
         userTestRepository.deleteById(attemptId);
     }
 }

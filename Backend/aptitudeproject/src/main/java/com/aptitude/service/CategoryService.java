@@ -16,7 +16,7 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
-    public Category getCategoryById(int categoryId) {
+    public Category getCategoryById(long categoryId) {
         return categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new RuntimeException("Category not found with id: " + categoryId));
     }
@@ -24,7 +24,7 @@ public class CategoryService {
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
     }
-    public Category updateCategory(int id, Category updatedCategory) {
+    public Category updateCategory(long id, Category updatedCategory) {
         return categoryRepository.findById(id).map(category -> {
             category.setCategoryName(updatedCategory.getCategoryName());
             category.setDescription(updatedCategory.getDescription());
@@ -32,7 +32,7 @@ public class CategoryService {
         }).orElse(null);
     }
 
-    public void deleteCategory(int categoryId) {
+    public void deleteCategory(long categoryId) {
         categoryRepository.deleteById(categoryId);
     }
 }

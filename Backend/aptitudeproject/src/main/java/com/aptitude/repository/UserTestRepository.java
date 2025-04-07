@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.aptitude.entity.UserTest;
 
 @Repository
-public interface UserTestRepository extends JpaRepository<UserTest, Integer> {}
+public interface UserTestRepository extends JpaRepository<UserTest, Long> {}
 

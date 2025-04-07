@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.aptitude.entity.PerformanceTracking;
 
 @Repository
-public interface PerformanceTrackingRepository extends JpaRepository<PerformanceTracking, Integer>{
+public interface PerformanceTrackingRepository extends JpaRepository<PerformanceTracking, Long>{
 
 }

@@ -21,11 +21,11 @@ public class QuestionService {
         return questionRepository.findAll();
     }
 
-    public Optional<Question> getQuestionById(int questionId) {
+    public Optional<Question> getQuestionById(long questionId) {
         return questionRepository.findById(questionId);
     }
 
-    public Question updateQuestion(int id, Question updatedQuestion) {
+    public Question updateQuestion(long id, Question updatedQuestion) {
         return questionRepository.findById(id).map(question -> {
             question.setQuestionText(updatedQuestion.getQuestionText());
             question.setOptionA(updatedQuestion.getOptionA());
@@ -36,7 +36,7 @@ public class QuestionService {
             return questionRepository.save(question);
         }).orElse(null);
     }
-    public void deleteQuestion(int questionId) {
+    public void deleteQuestion(long questionId) {
         questionRepository.deleteById(questionId);
     }
 }
