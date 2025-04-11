@@ -17,7 +17,7 @@ import com.aptitude.entity.User;
 import com.aptitude.service.UserService;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/user")
 public class UserController {
 
     @Autowired
