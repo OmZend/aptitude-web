@@ -14,8 +14,9 @@ public class PerformanceTracking {
     @Column(name = "tracking_id")
     private long trackingId;
 
-    @Column(name = "user_id", nullable = false)
-    private long userId;
+	@OneToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User userId;
 
     @Column(name = "category_id", nullable = false)
     private long categoryId;
@@ -36,9 +37,8 @@ public class PerformanceTracking {
     public PerformanceTracking() {
     }
 
-	public PerformanceTracking(long trackingId, long userId, long categoryId, long totalAttempts, int totalCorrect,
+	public PerformanceTracking(long trackingId, User userId, long categoryId, long totalAttempts, int totalCorrect,
 			Double accuracy, LocalDateTime lastAttempted) {
-		super();
 		this.trackingId = trackingId;
 		this.userId = userId;
 		this.categoryId = categoryId;
@@ -56,11 +56,11 @@ public class PerformanceTracking {
 		this.trackingId = trackingId;
 	}
 
-	public long getUserId() {
+	public User getUserId() {
 		return userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(User userId) {
 		this.userId = userId;
 	}
 
@@ -110,6 +110,4 @@ public class PerformanceTracking {
 				+ ", totalAttempts=" + totalAttempts + ", totalCorrect=" + totalCorrect + ", accuracy=" + accuracy
 				+ ", lastAttempted=" + lastAttempted + "]";
 	}
-
-    
 }
