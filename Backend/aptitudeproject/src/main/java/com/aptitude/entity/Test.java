@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Test {
@@ -17,17 +19,21 @@ public class Test {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long testId;
     
+    @Column(name = "test_name", nullable = false)
     private String testName;
     
-    private long categoryId;
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
+    @Column(name = "total_questions", columnDefinition = "INT DEFAULT 10")
+    private int totalQuestions=10;
     
-    private int totalQuestions;
+    @Column(name = "time_limit", columnDefinition = "INT DEFAULT 30")
+    private int timeLimit=30;
     
-    @Column(name = "time_limit")
-    private int timeLimit;
-    
-    @Column(name = "created_by")
-    private int createdBy;
+    @ManyToOne
+    @JoinColumn(name = "created_by", nullable = false)
+    private User createdBy;
     
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
@@ -36,12 +42,12 @@ public class Test {
     public Test() {
     }
 
-	public Test(long testId, String testName, long categoryId, int totalQuestions, int timeLimit, int createdBy,
+	public Test(long testId, String testName, Category category, int totalQuestions, int timeLimit, User createdBy,
 			LocalDateTime createdAt) {
 		super();
 		this.testId = testId;
 		this.testName = testName;
-		this.categoryId = categoryId;
+		this.category = category;
 		this.totalQuestions = totalQuestions;
 		this.timeLimit = timeLimit;
 		this.createdBy = createdBy;
@@ -64,12 +70,12 @@ public class Test {
 		this.testName = testName;
 	}
 
-	public long getCategoryId() {
-		return categoryId;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCategoryId(long categoryId) {
-		this.categoryId = categoryId;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	public int getTotalQuestions() {
@@ -88,11 +94,11 @@ public class Test {
 		this.timeLimit = timeLimit;
 	}
 
-	public int getCreatedBy() {
+	public User getCreatedBy() {
 		return createdBy;
 	}
 
-	public void setCreatedBy(int createdBy) {
+	public void setCreatedBy(User createdBy) {
 		this.createdBy = createdBy;
 	}
 
@@ -106,8 +112,10 @@ public class Test {
 
 	@Override
 	public String toString() {
-		return "Test [testId=" + testId + ", testName=" + testName + ", categoryId=" + categoryId + ", totalQuestions="
+		return "Test [testId=" + testId + ", testName=" + testName + ", category=" + category + ", totalQuestions="
 				+ totalQuestions + ", timeLimit=" + timeLimit + ", createdBy=" + createdBy + ", createdAt=" + createdAt
 				+ "]";
-	}   
+	}
+
+	   
 }

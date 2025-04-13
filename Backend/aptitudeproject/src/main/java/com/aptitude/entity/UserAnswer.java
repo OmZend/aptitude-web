@@ -6,6 +6,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
@@ -15,35 +17,39 @@ import jakarta.persistence.EnumType;
 @Entity
 public class UserAnswer {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long answerId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long answerId;
+	@ManyToOne
+	@JoinColumn(name = "attempt_id", nullable = false)
+	private UserTest userTest; // Foreign key referencing user_tests(attempt_id)
+	@ManyToOne
+	@JoinColumn(name = "question_id", nullable = false)
+	private Question question;// Foreign key referencing questions(question_id)
 
-    private long attemptedId; // Foreign key referencing user_tests(attempt_id)
-    private long questionId; // Foreign key referencing questions(question_id)
+	@Enumerated(EnumType.STRING)
+	private Option selectedOption;
 
-    @Enumerated(EnumType.STRING)
-    private Option selectedOption;
+	@Column(name = "is_correct")
+	private Boolean isCorrect;
 
-    private Boolean isCorrect;
-    
-    @UpdateTimestamp
-    @Column(name = "answered_at")
-    private LocalDateTime answeredAt;
+	@UpdateTimestamp
+	@Column(name = "answered_at")
+	private LocalDateTime answeredAt;
 
-    public enum Option {
-        A, B, C, D
-    }
+	public enum Option {
+		A, B, C, D
+	}
 
-    public UserAnswer() {
-    }
+	public UserAnswer() {
+	}
 
-	public UserAnswer(long answerId, long attemptedId, long questionId, Option selectedOption, Boolean isCorrect,
+	public UserAnswer(long answerId, UserTest userTest, Question question, Option selectedOption, Boolean isCorrect,
 			LocalDateTime answeredAt) {
 		super();
 		this.answerId = answerId;
-		this.attemptedId = attemptedId;
-		this.questionId = questionId;
+		this.userTest = userTest;
+		this.question = question;
 		this.selectedOption = selectedOption;
 		this.isCorrect = isCorrect;
 		this.answeredAt = answeredAt;
@@ -57,20 +63,20 @@ public class UserAnswer {
 		this.answerId = answerId;
 	}
 
-	public long getAttemptedId() {
-		return attemptedId;
+	public UserTest getUserTest() {
+		return userTest;
 	}
 
-	public void setAttemptedId(long attemptedId) {
-		this.attemptedId = attemptedId;
+	public void setUserTest(UserTest userTest) {
+		this.userTest = userTest;
 	}
 
-	public long getQuestionId() {
-		return questionId;
+	public Question getQuestion() {
+		return question;
 	}
 
-	public void setQuestionId(long questionId) {
-		this.questionId = questionId;
+	public void setQuestion(Question question) {
+		this.question = question;
 	}
 
 	public Option getSelectedOption() {
@@ -99,8 +105,9 @@ public class UserAnswer {
 
 	@Override
 	public String toString() {
-		return "UserAnswer [answerId=" + answerId + ", attemptedId=" + attemptedId + ", questionId=" + questionId
+		return "UserAnswer [answerId=" + answerId + ", userTest=" + userTest + ", question=" + question
 				+ ", selectedOption=" + selectedOption + ", isCorrect=" + isCorrect + ", answeredAt=" + answeredAt
 				+ "]";
 	}
+	
 }

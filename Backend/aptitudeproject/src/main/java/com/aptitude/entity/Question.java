@@ -13,8 +13,9 @@ public class Question {
     @Column(name = "question_id")
     private long questionId;
 
-    @Column(name = "category_id", nullable = false)
-    private long categoryId;
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category categoryId;
 
     @Column(name = "question_text", nullable = false)
     private String questionText;
@@ -42,7 +43,7 @@ public class Question {
         
     }
 
-	public Question(long questionId, long categoryId, String questionText, String optionA, String optionB,
+	public Question(long questionId, Category categoryId, String questionText, String optionA, String optionB,
 			String optionC, String optionD, String correctOption, LocalDateTime createdAt) {
 		super();
 		this.questionId = questionId;
@@ -64,11 +65,11 @@ public class Question {
 		this.questionId = questionId;
 	}
 
-	public long getCategoryId() {
+	public Category getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(long categoryId) {
+	public void setCategoryId(Category categoryId) {
 		this.categoryId = categoryId;
 	}
 
@@ -134,5 +135,5 @@ public class Question {
 				+ ", optionA=" + optionA + ", optionB=" + optionB + ", optionC=" + optionC + ", optionD=" + optionD
 				+ ", correctOption=" + correctOption + ", createdAt=" + createdAt + "]";
 	}
-
+	
 }

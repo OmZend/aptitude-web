@@ -6,6 +6,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
@@ -17,8 +19,13 @@ public class UserTest {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long attemptId;
 
-	private long userId;
-	private long testId;
+	@ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "test_id", nullable = false)
+    private Test test;
 	private double score;
 	@Column(name = "accuracy", precision = 5)
 	private double accuracy;
@@ -31,12 +38,12 @@ public class UserTest {
 	public UserTest() {
 	}
 
-	public UserTest(long attemptId, long userId, long testId, double score, double accuracy, String status,
+	public UserTest(long attemptId, User user, Test test, double score, double accuracy, String status,
 			LocalDateTime attemptedAt) {
 		super();
 		this.attemptId = attemptId;
-		this.userId = userId;
-		this.testId = testId;
+		this.user = user;
+		this.test = test;
 		this.score = score;
 		this.accuracy = accuracy;
 		this.status = status;
@@ -51,20 +58,20 @@ public class UserTest {
 		this.attemptId = attemptId;
 	}
 
-	public long getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(long userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public long getTestId() {
-		return testId;
+	public Test getTest() {
+		return test;
 	}
 
-	public void setTestId(long testId) {
-		this.testId = testId;
+	public void setTest(Test test) {
+		this.test = test;
 	}
 
 	public double getScore() {
@@ -101,8 +108,9 @@ public class UserTest {
 
 	@Override
 	public String toString() {
-		return "UserTest [attemptId=" + attemptId + ", userId=" + userId + ", testId=" + testId + ", score=" + score
+		return "UserTest [attemptId=" + attemptId + ", user=" + user + ", test=" + test + ", score=" + score
 				+ ", accuracy=" + accuracy + ", status=" + status + ", attemptedAt=" + attemptedAt + "]";
 	}
+
 
 }
