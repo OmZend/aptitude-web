@@ -8,9 +8,7 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-6">
           <a href="#" className="hover:bg-slate-700 px-3 py-2 rounded">Home</a>
           <a href="#" className="hover:bg-slate-700 px-3 py-2 rounded">Practice Tests</a>
-          <a href="#" className="hover:bg-slate-700 px-3 py-2 rounded">Interview</a>
-          <a href="#" className="hover:bg-slate-700 px-3 py-2 rounded">Puzzles</a>
-          <a href="#" className="hover:bg-slate-700 px-3 py-2 rounded">Forum</a>
+          
           <a href="#" className="hover:bg-slate-700 px-3 py-2 rounded">Login</a>
         </div>
         <button className="md:hidden text-xl">☰</button>
