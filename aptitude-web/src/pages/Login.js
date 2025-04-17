@@ -158,22 +158,6 @@ const Login = () => {
             />
           </div>
 
-          <div className="flex items-center justify-between transform transition-all duration-500 hover:translate-x-1">
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                id="remember"
-                className="h-4 w-4 text-blue-500 border-slate-300 rounded focus:ring-blue-500 transition-colors duration-200"
-              />
-              <label htmlFor="remember" className="ml-2 text-sm text-slate-600">
-                Remember me
-              </label>
-            </div>
-            <a href="#" className="text-sm text-blue-500 hover:text-blue-600 transition-colors duration-200">
-              Forgot password?
-            </a>
-          </div>
-
           <button
             type="submit"
             disabled={isLoading}

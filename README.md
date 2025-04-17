@@ -12,3 +12,11 @@ step 3: copy paste these commands one by one<br>
 <b>     npm install</b><br> 
 <b>     npm npm i -D tailwindcss@3 postcss autoprefixer</b><br>   
 step 4: npm start<br>
+
+Category:
+general aptitude
+verbal reasoning
+programing
+logical reasoning
+general knowledge
+coding

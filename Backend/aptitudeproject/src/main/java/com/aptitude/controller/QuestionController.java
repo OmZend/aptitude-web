@@ -10,6 +10,7 @@ import com.aptitude.service.QuestionService;
 
 @RestController
 @RequestMapping("/api/questions")
+@CrossOrigin(origins = "http://localhost:3000")
 public class QuestionController {
 
     @Autowired
