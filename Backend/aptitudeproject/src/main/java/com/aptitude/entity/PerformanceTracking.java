@@ -1,6 +1,7 @@
 package com.aptitude.entity;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.UpdateTimestamp;
@@ -14,12 +15,12 @@ public class PerformanceTracking {
     @Column(name = "tracking_id")
     private long trackingId;
 
-	@OneToOne
+	@ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User userId;
-
-    @Column(name = "category_id", nullable = false)
-    private long categoryId;
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category categoryId;
 
     @Column(name = "total_attempts", nullable = false)
     private long totalAttempts = 0;
@@ -37,8 +38,9 @@ public class PerformanceTracking {
     public PerformanceTracking() {
     }
 
-	public PerformanceTracking(long trackingId, User userId, long categoryId, long totalAttempts, int totalCorrect,
+	public PerformanceTracking(long trackingId, User userId, Category categoryId, long totalAttempts, int totalCorrect,
 			Double accuracy, LocalDateTime lastAttempted) {
+		super();
 		this.trackingId = trackingId;
 		this.userId = userId;
 		this.categoryId = categoryId;
@@ -64,11 +66,11 @@ public class PerformanceTracking {
 		this.userId = userId;
 	}
 
-	public long getCategoryId() {
+	public Category getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(long categoryId) {
+	public void setCategoryId(Category categoryId) {
 		this.categoryId = categoryId;
 	}
 
@@ -110,4 +112,6 @@ public class PerformanceTracking {
 				+ ", totalAttempts=" + totalAttempts + ", totalCorrect=" + totalCorrect + ", accuracy=" + accuracy
 				+ ", lastAttempted=" + lastAttempted + "]";
 	}
+
+	
 }
