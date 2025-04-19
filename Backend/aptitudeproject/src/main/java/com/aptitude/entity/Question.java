@@ -34,6 +34,10 @@ public class Question {
     @Column(name = "correct_option", nullable = false)
     private String correctOption;
 
+	@Column(name = "explanation", nullable = false)
+	private String explanation;
+
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
@@ -42,9 +46,10 @@ public class Question {
         
     }
 
+	
+
 	public Question(long questionId, long categoryId, String questionText, String optionA, String optionB,
-			String optionC, String optionD, String correctOption, LocalDateTime createdAt) {
-		super();
+			String optionC, String optionD, String correctOption, String explanation, LocalDateTime createdAt) {
 		this.questionId = questionId;
 		this.categoryId = categoryId;
 		this.questionText = questionText;
@@ -53,8 +58,11 @@ public class Question {
 		this.optionC = optionC;
 		this.optionD = optionD;
 		this.correctOption = correctOption;
+		this.explanation = explanation;
 		this.createdAt = createdAt;
 	}
+
+
 
 	public long getQuestionId() {
 		return questionId;
@@ -111,6 +119,13 @@ public class Question {
 	public void setOptionD(String optionD) {
 		this.optionD = optionD;
 	}
+	public String getExplanation() {
+		return explanation;
+	}
+
+	public void setExplanation(String explanation) {
+		this.explanation = explanation;
+	}
 
 	public String getCorrectOption() {
 		return correctOption;
@@ -120,6 +135,8 @@ public class Question {
 		this.correctOption = correctOption;
 	}
 
+	
+
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
@@ -128,11 +145,12 @@ public class Question {
 		this.createdAt = createdAt;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "Question [questionId=" + questionId + ", categoryId=" + categoryId + ", questionText=" + questionText
 				+ ", optionA=" + optionA + ", optionB=" + optionB + ", optionC=" + optionC + ", optionD=" + optionD
-				+ ", correctOption=" + correctOption + ", createdAt=" + createdAt + "]";
+				+ ", correctOption=" + correctOption + ", explanation=" + explanation + ", createdAt=" + createdAt + "]";
 	}
 
 }
