@@ -40,4 +40,10 @@ public class QuestionController {
     public void deleteQuestion(@PathVariable long id) {
         questionService.deleteQuestion(id);
     }
+
+    @GetMapping("/category/{categoryId}")
+    public List<Question> getQuestionsByCategory(@PathVariable Long categoryId) {
+        return questionService.getQuestionsByCategory(categoryId);
+    }
+
 }

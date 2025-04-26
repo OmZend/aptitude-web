@@ -10,6 +10,8 @@ import { categories, sidebarLinks } from './data/mockData';
 import GeneralAptitudeQuestions from './pages/GeneralAptitudeQuestions';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
+import Logical from './pages/Logical';
+import Verbal from './pages/Verbal';
 
 const AppLayout = () => {
   const location = useLocation();
@@ -33,18 +35,8 @@ const AppLayout = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Registration />} />
             <Route path="/general-aptitude" element={<GeneralAptitudeQuestions />} />
-            <Route path="/logical-reasoning" element={
-              <div className="p-8">
-                <h1 className="text-2xl font-bold text-slate-800 mb-6">Logical Reasoning</h1>
-                <p className="text-gray-600">Coming soon! We're working on adding logical reasoning questions.</p>
-              </div>
-            } />
-            <Route path="/verbal-reasoning" element={
-              <div className="p-8">
-                <h1 className="text-2xl font-bold text-slate-800 mb-6">Verbal Reasoning</h1>
-                <p className="text-gray-600">Coming soon! We're working on adding verbal reasoning questions.</p>
-              </div>
-            } />
+            <Route path="/logical-reasoning" element={<Logical/>} />
+            <Route path="/verbal-reasoning" element={<Verbal/>} />
             <Route path="/general-knowledge" element={
               <div className="p-8">
                 <h1 className="text-2xl font-bold text-slate-800 mb-6">General Knowledge</h1>

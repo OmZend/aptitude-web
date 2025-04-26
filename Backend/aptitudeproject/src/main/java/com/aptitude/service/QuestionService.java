@@ -25,6 +25,10 @@ public class QuestionService {
         return questionRepository.findById(questionId);
     }
 
+    public List<Question> getQuestionsByCategory(Long categoryId) {
+        return questionRepository.findByCategoryId_CategoryId(categoryId);
+    }
+
     public Question updateQuestion(long id, Question updatedQuestion) {
         return questionRepository.findById(id).map(question -> {
             question.setQuestionText(updatedQuestion.getQuestionText());
