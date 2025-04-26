@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const GeneralAptitudeQuestions = () => {
+const Technical = () => {
   const [questions, setQuestions] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [showExplanations, setShowExplanations] = useState({});
@@ -11,21 +11,20 @@ const GeneralAptitudeQuestions = () => {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/questions/category/1');
-        const allQuestions = response.data;  // Assuming response is an array of questions
+        const response = await axios.get('http://localhost:8080/api/questions/category/5');
+        const allQuestions = response.data;
 
-        // Map API response to match the required structure
-        const formattedQuestions = allQuestions.map((q, index) => ({
-          id: q.questionId,  // Assuming the question has an 'id' field
-          question: q.questionText,  // Assuming the question text is in 'questionText'
+        const formattedQuestions = allQuestions.map((q) => ({
+          id: q.question_id,
+          question: q.questionText,
           options: [
             { id: 'A', text: q.optionA },
             { id: 'B', text: q.optionB },
             { id: 'C', text: q.optionC },
             { id: 'D', text: q.optionD },
           ],
-          correctAnswer: q.correctOption,  // Assuming the correct option is in 'correctOption'
-          explanation: q.explanation,  // Assuming the explanation is in 'explanation'
+          correctAnswer: q.correctOption,
+          explanation: q.explanation,
         }));
 
         setQuestions(formattedQuestions);
@@ -53,7 +52,7 @@ const GeneralAptitudeQuestions = () => {
     return selectedAnswer === question.correctAnswer ? 'correct' : 'wrong';
   };
 
-  // Calculate pagination
+  // Pagination logic
   const totalPages = Math.ceil(questions.length / questionsPerPage);
   const indexOfLastQuestion = currentPage * questionsPerPage;
   const indexOfFirstQuestion = indexOfLastQuestion - questionsPerPage;
@@ -68,19 +67,20 @@ const GeneralAptitudeQuestions = () => {
 
   return (
     <div className="max-w-4xl mx-auto py-8 px-4">
-      <h1 className="text-2xl font-bold text-slate-800 mb-6">General Aptitude Questions</h1>
+      <h1 className="text-2xl font-bold text-slate-800 mb-6">Technical Questions</h1>
       <div className="space-y-8">
-        {currentQuestions.map((question) => {
+        {currentQuestions.map((question, index) => {
           const answerStatus = getAnswerStatus(question, selectedAnswers[question.id]);
-          
+          const questionNumber = indexOfFirstQuestion + index + 1;
+
           return (
             <div key={question.id} className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-lg font-semibold text-slate-800 mb-4">
-                {question.id}. {question.question}
+                {questionNumber}. {question.question}
               </h2>
               <div className="space-y-3">
                 {question.options.map((option) => (
-                  <div 
+                  <div
                     key={option.id}
                     className={`p-3 rounded-lg border cursor-pointer transition-all duration-200 ${
                       selectedAnswers[question.id] === option.id
@@ -91,11 +91,11 @@ const GeneralAptitudeQuestions = () => {
                     }`}
                     onClick={() => handleAnswerSelect(question.id, option.id)}
                   >
-                    <label className="flex items-start cursor-pointer">
+                    <label className="flex items-start cursor-pointer w-full">
                       <div className="flex items-center h-5">
                         <input
                           type="radio"
-                          name={`question-${question.id}`}
+                          name={`question-${question.id}`}  // This ensures each group of radios is unique to the question
                           checked={selectedAnswers[question.id] === option.id}
                           onChange={() => handleAnswerSelect(question.id, option.id)}
                           className="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
@@ -108,7 +108,7 @@ const GeneralAptitudeQuestions = () => {
                   </div>
                 ))}
               </div>
-              
+
               {showExplanations[question.id] && (
                 <div className={`mt-4 p-4 rounded-lg ${
                   answerStatus === 'correct' 
@@ -155,13 +155,15 @@ const GeneralAptitudeQuestions = () => {
         >
           Prev
         </button>
-        
+
         {[...Array(totalPages)].map((_, index) => (
           <button
             key={index}
             onClick={() => paginate(index + 1)}
             className={`px-4 py-2 rounded ${
-              currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900'
+              currentPage === index + 1
+                ? 'bg-blue-500 text-white'
+                : 'bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900'
             } border border-slate-200`}
           >
             {index + 1}
@@ -184,4 +186,4 @@ const GeneralAptitudeQuestions = () => {
   );
 };
 
-export default GeneralAptitudeQuestions;
+export default Technical;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const Verbal = () => {
+const GeneralAptitude = () => {
   const [questions, setQuestions] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [showExplanations, setShowExplanations] = useState({});
@@ -12,7 +12,7 @@ const Verbal = () => {
     const fetchQuestions = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/api/questions/category/3"
+          "http://localhost:8080/api/questions/category/1"
         );
         const allQuestions = response.data; // Assuming response is an array of questions
 
@@ -74,7 +74,7 @@ const Verbal = () => {
   return (
     <div className="max-w-4xl mx-auto py-8 px-4">
       <h1 className="text-2xl font-bold text-slate-800 mb-6">
-        Verbal Reasoning
+        General Aptitude Questions
       </h1>
       <div className="space-y-8">
         {currentQuestions.map((question, index) => {
@@ -234,4 +234,4 @@ const Verbal = () => {
   );
 };
 
-export default Verbal;
+export default GeneralAptitude;

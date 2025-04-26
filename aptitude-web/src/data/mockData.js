@@ -27,7 +27,7 @@ export const categories = [
   { 
     id: 5, 
     title: 'Programming', 
-    icon: <img src="compterscience.png" alt="Computer Science" />, 
+    icon: <img src="compterscience.png" alt="Programming" />, 
     description: 'Programming and CS fundamentals' 
   },
   { 
@@ -43,6 +43,6 @@ export const sidebarLinks = [
   { id: 2, title: 'Logical Reasoning', link: '/logical-reasoning' },
   { id: 3, title: 'Verbal Reasoning', link: '/verbal-reasoning' },
   { id: 4, title: 'General Knowledge', link: '/general-knowledge' },
-  { id: 5, title: 'Programming', link: '/programming' },
+  { id: 5, title: 'Technical', link: '/technical' },
   { id: 6, title: 'Coding', link: '/coding' }
 ];
