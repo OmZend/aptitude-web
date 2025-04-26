@@ -7,14 +7,16 @@ import HeroSection from './components/home/HeroSection';
 import CategoriesGrid from './components/home/CategoriesGrid';
 import StatsSection from './components/home/StatsSection';
 import { categories, sidebarLinks } from './data/mockData';
-import GeneralAptitude from './pages/GeneralAptitude';
+
 import Login from './pages/Login';
 import Registration from './pages/Registration';
-import Logical from './pages/Logical';
-import Verbal from './pages/Verbal';
-import GeneralKnowledge from './pages/GeneralKnowledge';
-import Technical from './pages/Technical';
-import Coding from './pages/Coding';
+
+import GeneralAptitude from './pages/categories/GeneralAptitude';
+import Logical from './pages/categories/Logical';
+import Verbal from './pages/categories/Verbal';
+import GeneralKnowledge from './pages/categories/GeneralKnowledge';
+import Technical from './pages/categories/Technical';
+import Coding from './pages/categories/Coding';
 
 const AppLayout = () => {
   const location = useLocation();
