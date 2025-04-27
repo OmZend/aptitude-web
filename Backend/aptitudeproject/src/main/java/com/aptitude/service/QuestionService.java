@@ -4,6 +4,9 @@ import com.aptitude.entity.Question;
 import com.aptitude.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,5 +45,23 @@ public class QuestionService {
     }
     public void deleteQuestion(long questionId) {
         questionRepository.deleteById(questionId);
+    }
+    
+    public List<Question> getRandom10QuestionsByCategory(Long categoryId) {
+        return questionRepository.findRandom10QuestionsByCategory(categoryId);
+    }
+    public List<Question> getQuickTestQuestions() {
+        List<Question> quickTestQuestions = new ArrayList<>();
+        
+        // Get 10 random questions from each category (1-6)
+        for (long categoryId = 1; categoryId <= 6; categoryId++) {
+            List<Question> categoryQuestions = getRandom10QuestionsByCategory(categoryId);
+            quickTestQuestions.addAll(categoryQuestions);
+        }
+        
+        // Shuffle all questions
+        Collections.shuffle(quickTestQuestions);
+        
+        return quickTestQuestions;
     }
 }

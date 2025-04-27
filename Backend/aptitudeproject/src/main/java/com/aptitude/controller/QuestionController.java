@@ -45,5 +45,9 @@ public class QuestionController {
     public List<Question> getQuestionsByCategory(@PathVariable Long categoryId) {
         return questionService.getQuestionsByCategory(categoryId);
     }
+    @GetMapping("/quicktest")
+    public List<Question> getQuickTestQuestions() {
+        return questionService.getQuickTestQuestions();
+    }
 
 }
