@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: user?.name || '',
     email: user?.email || '',
@@ -13,6 +15,38 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [testResults, setTestResults] = useState([]);
+
+  // Mock data for test results - in a real app, this would come from an API
+  useEffect(() => {
+    const mockResults = [
+      {
+        id: 1,
+        testName: 'General Aptitude Test',
+        date: '2024-03-15',
+        score: 85,
+        totalQuestions: 20,
+        correctAnswers: 17
+      },
+      {
+        id: 2,
+        testName: 'Logical Reasoning Test',
+        date: '2024-03-10',
+        score: 78,
+        totalQuestions: 15,
+        correctAnswers: 12
+      },
+      {
+        id: 3,
+        testName: 'Verbal Ability Test',
+        date: '2024-03-05',
+        score: 92,
+        totalQuestions: 25,
+        correctAnswers: 23
+      }
+    ];
+    setTestResults(mockResults);
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -48,6 +82,11 @@ const Profile = () => {
     } catch (err) {
       setError('Failed to update profile');
     }
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
   };
 
   return (
@@ -184,11 +223,49 @@ const Profile = () => {
 
         <div className="mt-8 pt-6 border-t border-slate-200">
           <button
-            onClick={logout}
+            onClick={handleLogout}
             className="w-full bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transform transition-all duration-300 hover:scale-[1.02]"
           >
             Logout
           </button>
+        </div>
+
+        {/* Test Results Section */}
+        <div className="mt-8 pt-6 border-t border-slate-200">
+          <h3 className="text-xl font-semibold text-slate-800 mb-4">Test Performance</h3>
+          
+          {testResults.length > 0 ? (
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-blue-600">
+                    {testResults.length}
+                  </p>
+                  <p className="text-sm text-slate-500">Total Tests</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-blue-600">
+                    {Math.round(testResults.reduce((acc, curr) => acc + curr.score, 0) / testResults.length)}%
+                  </p>
+                  <p className="text-sm text-slate-500">Average Score</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-blue-600">
+                    {testResults.reduce((acc, curr) => acc + curr.correctAnswers, 0)}
+                  </p>
+                  <p className="text-sm text-slate-500">Total Correct</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-blue-600">
+                    {testResults.reduce((acc, curr) => acc + curr.totalQuestions, 0)}
+                  </p>
+                  <p className="text-sm text-slate-500">Total Questions</p>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <p className="text-slate-500 text-center py-4">No test results available yet.</p>
+          )}
         </div>
       </div>
     </div>

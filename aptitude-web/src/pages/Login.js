@@ -1,65 +1,72 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { validateEmail, validatePassword } from '../utils/validation';
 
 const Login = () => {
-  const navigate = useNavigate();
-  const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [loginError, setLoginError] = useState('');
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
+    setFormData(prev => ({
+      ...prev,
       [name]: value
     }));
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    
+    if (!formData.email) {
+      newErrors.email = 'Email is required';
+    } else if (!validateEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+    
+    if (!formData.password) {
+      newErrors.password = 'Password is required';
+    } else if (!validatePassword(formData.password)) {
+      newErrors.password = 'Password does not meet requirements';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setIsLoading(true);
-
-    // Basic validation
-    if (!formData.email || !formData.password) {
-      setError('Please fill in all fields');
-      setIsLoading(false);
-      return;
-    }
-
-    if (!formData.email.includes('@')) {
-      setError('Please enter a valid email address');
-      setIsLoading(false);
+    setLoginError('');
+    
+    if (!validateForm()) {
       return;
     }
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // For demo purposes, accept any email/password
-      login({
-        email: formData.email,
-        name: formData.email.split('@')[0] // Simple way to get a name for demo
-      });
-      
+      await login(formData.email, formData.password);
       navigate('/');
-    } catch (err) {
-      setError('Invalid email or password');
-    } finally {
-      setIsLoading(false);
+    } catch (error) {
+      setLoginError(error.message || 'Failed to login');
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-slate-50 to-blue-100 relative overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiA0NGMwIDYuNjI3LTUuMzczIDEyLTEyIDEyUzEyIDUwLjYyNyAxMiA0NCAxNy4zNzMgMzIgMjQgMzJzMTIgNS4zNzMgMTIgMTJ6IiBmaWxsPSIjZWVlIi8+PC9nPjwvc3ZnPg==')] opacity-40"></div>
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiA0NGMwIDYuNjI3LTUuMzczIDEyLTEyIDEyUzEyIDUwLjYyNyAxyIDQ0IDE3LjM3MyAzMiAyNCAzMnMxMiA1LjM3MyAxMiAxMnoiIGZpbGw9IiNlZWUiLz48L2c+PC9zdmc+')] opacity-40"></div>
       
       {/* Animated Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
@@ -124,20 +131,20 @@ const Login = () => {
         </div>
 
         <div className="text-center mb-8 animate-slideDown">
-          <h2 className="text-3xl font-bold text-slate-800 mb-2">Welcome Back</h2>
-          <p className="text-slate-600">Sign in to continue your learning journey</p>
+          <h2 className="text-3xl font-bold text-slate-800 mb-2">Login</h2>
+          <p className="text-slate-600">Welcome back! Please enter your details</p>
         </div>
         
-        {error && (
+        {loginError && (
           <div className="bg-red-50 text-red-500 p-3 rounded-md mb-4 animate-shake">
-            {error}
+            {loginError}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="transform transition-all duration-500 hover:translate-x-1">
+          <div>
             <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-1">
-              Email Address
+              Email
             </label>
             <input
               type="email"
@@ -145,12 +152,15 @@ const Login = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-white/70 backdrop-blur-sm"
+              className={`w-full px-3 py-2 border ${errors.email ? 'border-red-500' : 'border-slate-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-white/70 backdrop-blur-sm`}
               placeholder="Enter your email"
             />
+            {errors.email && (
+              <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+            )}
           </div>
 
-          <div className="transform transition-all duration-500 hover:translate-x-1">
+          <div>
             <label htmlFor="password" className="block text-sm font-medium text-slate-700 mb-1">
               Password
             </label>
@@ -160,37 +170,43 @@ const Login = () => {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-white/70 backdrop-blur-sm"
+              className={`w-full px-3 py-2 border ${errors.password ? 'border-red-500' : 'border-slate-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-white/70 backdrop-blur-sm`}
               placeholder="Enter your password"
             />
+            {errors.password && (
+              <p className="mt-1 text-sm text-red-500">{errors.password}</p>
+            )}
+          </div>
+
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="remember"
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-slate-300 rounded"
+              />
+              <label htmlFor="remember" className="ml-2 block text-sm text-slate-700">
+                Remember me
+              </label>
+            </div>
+            <Link to="/forgot-password" className="text-sm text-blue-600 hover:text-blue-500">
+              Forgot password?
+            </Link>
           </div>
 
           <button
             type="submit"
-            disabled={isLoading}
-            className={`w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transform transition-all duration-300 hover:scale-[1.02] ${
-              isLoading ? 'opacity-75 cursor-not-allowed' : ''
-            }`}
+            className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transform transition-all duration-300 hover:scale-[1.02]"
           >
-            {isLoading ? (
-              <span className="flex items-center justify-center">
-                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Signing in...
-              </span>
-            ) : (
-              'Sign In'
-            )}
+            Login
           </button>
         </form>
 
-        <div className="mt-6 text-center transform transition-all duration-500 hover:translate-y-[-2px]">
+        <div className="mt-6 text-center">
           <p className="text-sm text-slate-600">
             Don't have an account?{' '}
-            <Link to="/register" className="text-blue-500 hover:text-blue-600 font-medium transition-colors duration-200">
-              Sign up
+            <Link to="/register" className="text-blue-600 hover:text-blue-500">
+              Register
             </Link>
           </p>
         </div>
