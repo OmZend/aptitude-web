@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
 import Footer from './components/layout/Footer';
@@ -10,6 +11,9 @@ import { categories, sidebarLinks } from './data/mockData';
 import GeneralAptitudeQuestions from './pages/GeneralAptitudeQuestions';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
+import QuickTest from './pages/QuickTest';
+import TestResults from './pages/TestResults';
+import Profile from './pages/Profile';
 
 const AppLayout = () => {
   const location = useLocation();
@@ -33,6 +37,9 @@ const AppLayout = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Registration />} />
             <Route path="/general-aptitude" element={<GeneralAptitudeQuestions />} />
+            <Route path="/quick-test" element={<QuickTest />} />
+            <Route path="/test-results" element={<TestResults />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/logical-reasoning" element={
               <div className="p-8">
                 <h1 className="text-2xl font-bold text-slate-800 mb-6">Logical Reasoning</h1>
@@ -73,9 +80,12 @@ const AppLayout = () => {
 
 const App = () => {
   return (
-    <Router>
-      <AppLayout />
-    </Router>
+    <AuthProvider>
+      <Router>
+        <AppLayout />
+      </Router>
+    </AuthProvider>
   );
 };
+
 export default App;

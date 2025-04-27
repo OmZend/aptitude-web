@@ -1,36 +1,46 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 const Navbar = () => {
-  const navigate = useNavigate();
+  const location = useLocation();
+  const { isAuthenticated } = useAuth();
 
   return (
-    <nav className="bg-slate-800 text-white px-6 py-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="text-xl font-bold cursor-pointer" onClick={() => navigate('/')}>A.O.R.A.</div>
-        <div className="hidden md:flex space-x-6">  
-          <a 
-            href="#" 
-            className="hover:bg-slate-700 px-3 py-2 rounded"
-            onClick={(e) => {
-              e.preventDefault();
-              navigate('/');
-            }}
-          >
-            Home
-          </a>
-          <a 
-            href="#" 
-            className="hover:bg-slate-700 px-3 py-2 rounded"
-            onClick={(e) => {
-              e.preventDefault();
-              navigate('/login');
-            }}
-          >
-            Login
-          </a>
+    <nav className="bg-white shadow-md">
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center h-16">
+          <Link to="/" className="text-xl font-bold text-blue-600">
+        
+          </Link>
+          
+          <div className="flex items-center space-x-4">
+            <Link
+              to="/"
+              className={`text-slate-600 hover:text-blue-600 transition-colors duration-200 ${
+                location.pathname === '/' ? 'text-blue-600 font-medium' : ''
+              }`}
+            >
+              Home
+            </Link>
+            <Link
+              to="/login"
+              className={`text-slate-600 hover:text-blue-600 transition-colors duration-200 ${
+                location.pathname === '/login' ? 'text-blue-600 font-medium' : ''
+              }`}
+            >
+              Login
+            </Link>
+            <Link
+              to="/register"
+              className={`text-slate-600 hover:text-blue-600 transition-colors duration-200 ${
+                location.pathname === '/register' ? 'text-blue-600 font-medium' : ''
+              }`}
+            >
+              Register
+            </Link>
+          </div>
         </div>
-        <button className="md:hidden text-xl">☰</button>
       </div>
     </nav>
   );

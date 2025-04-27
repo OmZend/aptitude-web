@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -39,9 +41,14 @@ const Login = () => {
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
-      console.log('Login attempt with:', formData);
-      // Redirect to registration page instead of home
-      navigate('/register');
+      
+      // For demo purposes, accept any email/password
+      login({
+        email: formData.email,
+        name: formData.email.split('@')[0] // Simple way to get a name for demo
+      });
+      
+      navigate('/');
     } catch (err) {
       setError('Invalid email or password');
     } finally {
