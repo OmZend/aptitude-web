@@ -47,16 +47,9 @@ public class Question {
         
     }
 
-<<<<<<< HEAD
-	
-
-	public Question(long questionId, long categoryId, String questionText, String optionA, String optionB,
-			String optionC, String optionD, String correctOption, String explanation, LocalDateTime createdAt) {
-=======
 	public Question(long questionId, Category categoryId, String questionText, String optionA, String optionB,
 			String optionC, String optionD, String correctOption, LocalDateTime createdAt) {
 		super();
->>>>>>> 87d30211c6d910024fa39b8b3eba485fb7401ea7
 		this.questionId = questionId;
 		this.categoryId = categoryId;
 		this.questionText = questionText;

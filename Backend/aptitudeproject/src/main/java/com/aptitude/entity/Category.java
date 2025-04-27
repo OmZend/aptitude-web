@@ -2,6 +2,8 @@ package com.aptitude.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -11,6 +13,7 @@ public class Category {
 
     @Id
     @Column(name = "category_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long categoryId;
 
     @Column(name = "category_name", nullable = false)

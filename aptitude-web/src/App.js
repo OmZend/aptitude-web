@@ -8,12 +8,19 @@ import HeroSection from './components/home/HeroSection';
 import CategoriesGrid from './components/home/CategoriesGrid';
 import StatsSection from './components/home/StatsSection';
 import { categories, sidebarLinks } from './data/mockData';
-import GeneralAptitudeQuestions from './pages/GeneralAptitudeQuestions';
+
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 import QuickTest from './pages/QuickTest';
 import TestResults from './pages/TestResults';
 import Profile from './pages/Profile';
+
+import GeneralAptitude from './pages/categories/GeneralAptitude';
+import Logical from './pages/categories/Logical';
+import Verbal from './pages/categories/Verbal';
+import GeneralKnowledge from './pages/categories/GeneralKnowledge';
+import Technical from './pages/categories/Technical';
+import Coding from './pages/categories/Coding';
 
 const AppLayout = () => {
   const location = useLocation();
@@ -36,40 +43,15 @@ const AppLayout = () => {
             } />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Registration />} />
-            <Route path="/general-aptitude" element={<GeneralAptitudeQuestions />} />
+            <Route path="/general-aptitude" element={<GeneralAptitude />} />
             <Route path="/quick-test" element={<QuickTest />} />
             <Route path="/test-results" element={<TestResults />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/logical-reasoning" element={
-              <div className="p-8">
-                <h1 className="text-2xl font-bold text-slate-800 mb-6">Logical Reasoning</h1>
-                <p className="text-gray-600">Coming soon! We're working on adding logical reasoning questions.</p>
-              </div>
-            } />
-            <Route path="/verbal-reasoning" element={
-              <div className="p-8">
-                <h1 className="text-2xl font-bold text-slate-800 mb-6">Verbal Reasoning</h1>
-                <p className="text-gray-600">Coming soon! We're working on adding verbal reasoning questions.</p>
-              </div>
-            } />
-            <Route path="/general-knowledge" element={
-              <div className="p-8">
-                <h1 className="text-2xl font-bold text-slate-800 mb-6">General Knowledge</h1>
-                <p className="text-gray-600">Coming soon! We're working on adding general knowledge questions.</p>
-              </div>
-            } />
-            <Route path="/programming" element={
-              <div className="p-8">
-                <h1 className="text-2xl font-bold text-slate-800 mb-6">Programming</h1>
-                <p className="text-gray-600">Coming soon! We're working on adding programming questions.</p>
-              </div>
-            } />
-            <Route path="/coding" element={
-              <div className="p-8">
-                <h1 className="text-2xl font-bold text-slate-800 mb-6">Coding</h1>
-                <p className="text-gray-600">Coming soon! We're working on adding coding questions.</p>
-              </div>
-            } />
+            <Route path="/logical-reasoning" element={<Logical />} />
+            <Route path="/verbal-reasoning" element={<Verbal />} />
+            <Route path="/general-knowledge" element={<GeneralKnowledge />} />
+            <Route path="/technical" element={<Technical />} />
+            <Route path="/coding" element={<Coding />} />
           </Routes>
         </div>
       </div>

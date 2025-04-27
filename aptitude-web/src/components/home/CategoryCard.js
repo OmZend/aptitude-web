@@ -8,7 +8,24 @@ const CategoryCard = ({ category }) => {
     if (category.title === 'General Aptitude') {
       navigate('/general-aptitude');
     }
+    if (category.title === 'General Knowledge') {
+      navigate('/general-knowledge');
+    }
+    if (category.title === 'Logical Reasoning') {
+      navigate('/logical-reasoning');
+    } 
+    if (category.title === 'Technical') {
+      navigate('/technical');
+    }
+    if (category.title === 'Verbal Reasoning') {
+      navigate('/verbal-reasoning');
+    }
+    if (category.title === 'Coding') {
+      navigate('/coding');
+    }
+    
   };
+  
 
   return (
     <div 
