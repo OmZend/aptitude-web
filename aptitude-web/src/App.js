@@ -22,7 +22,17 @@ import GeneralKnowledge from './pages/categories/GeneralKnowledge';
 import Technical from './pages/categories/Technical';
 import Coding from './pages/categories/Coding';
 
-const AppLayout = () => {
+const App = () => {
+  return (
+    <AuthProvider>
+      <Router>
+        <AppContent />
+      </Router>
+    </AuthProvider>
+  );
+};
+
+const AppContent = () => {
   const location = useLocation();
   const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
 
@@ -57,16 +67,6 @@ const AppLayout = () => {
       </div>
       <Footer />
     </div>
-  );
-};
-
-const App = () => {
-  return (
-    <AuthProvider>
-      <Router>
-        <AppLayout />
-      </Router>
-    </AuthProvider>
   );
 };
 

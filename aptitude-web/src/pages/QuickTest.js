@@ -11,6 +11,7 @@ const QuickTest = () => {
   const [showConfirmation, setShowConfirmation] = useState(true);
   const [testStarted, setTestStarted] = useState(false);
   const [timeLeft, setTimeLeft] = useState(30 * 60); // 30 minutes in seconds
+  const [showTimeWarning, setShowTimeWarning] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -59,7 +60,13 @@ const QuickTest = () => {
     let timer;
     if (testStarted && timeLeft > 0) {
       timer = setInterval(() => {
-        setTimeLeft(prevTime => prevTime - 1);
+        setTimeLeft(prevTime => {
+          const newTime = prevTime - 1;
+          if (newTime === 60) { // 1 minute left
+            setShowTimeWarning(true);
+          }
+          return newTime;
+        });
       }, 1000);
     } else if (timeLeft === 0) {
       handleTestComplete();
@@ -230,10 +237,19 @@ const QuickTest = () => {
             <div className="animate-fadeIn">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold text-slate-800">Question {currentQuestion + 1} of {questions.length}</h2>
-                <div className="text-xl font-semibold text-slate-700">
+                <div className={`text-xl font-semibold ${
+                  timeLeft <= 60 ? 'text-red-600 animate-pulse' : 'text-slate-700'
+                }`}>
                   Time Remaining: {formatTime(timeLeft)}
                 </div>
               </div>
+
+              {showTimeWarning && (
+                <div className="bg-red-50 border border-red-200 text-red-800 p-4 rounded-md mb-6 animate-bounce">
+                  <p className="font-medium">Warning: Less than 1 minute remaining!</p>
+                  <p className="text-sm mt-1">Please complete your answers quickly.</p>
+                </div>
+              )}
 
               <div className="mb-8">
                 <h3 className="text-xl font-medium text-slate-700 mb-4">
