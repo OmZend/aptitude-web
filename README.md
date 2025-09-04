@@ -1,22 +1,61 @@
-<h1>AORA aptitude-web</h1>
-<bold>Members:</bold>
-<li>Amruta
-<li>Roshan
-<li>Arya
-<li>Om
-<br>
-<h3>How to implement Front End:</h3>
-step 1: git clone 'https://github.com/OmZend/aptitude-web.git'<br>
-step 2: open react project directory in VS Code terminal<br>
-step 3: copy paste these commands one by one<br>
-<b>     npm install</b><br> 
-<b>     npm npm i -D tailwindcss@3 postcss autoprefixer</b><br>   
-step 4: npm start<br>
+# 🧠 Aptitude Preparation & Mock Test Website
 
-Category:
-general aptitude
-verbal reasoning
-programing
-logical reasoning
-general knowledge
-coding
+A web app to practice aptitude questions, take mock tests, and track performance.
+Built with **React.js**, **Spring Boot**, and **MySQL**.
+
+---
+
+## 🚀 Features
+
+* User registration & login
+* Categorized aptitude questions
+* Mock tests with timer & instant results
+
+---
+
+## 🏗️ Tech Stack
+
+* **Frontend:** React.js, Axios, Bootstrap/Tailwind
+* **Backend:** Spring Boot, Hibernate, REST APIs
+* **Database:** MySQL
+* **Tools:** GitHub, Postman
+
+---
+
+## ⚡ Setup
+
+1. **Clone repo**
+
+   ```bash
+   git clone https://github.com/your-username/aptitude-prep.git
+   ```
+2. **Database**
+
+   ```sql
+   CREATE DATABASE aptitude;
+   ```
+
+   Configure `application.properties` with your DB credentials.
+3. **Run Backend**
+
+   ```bash
+   cd backend
+   mvn spring-boot:run
+   ```
+4. **Run Frontend**
+
+   ```bash
+   cd frontend
+   npm install
+   npm start
+   ```
+
+---
+
+## 📌 API Samples
+
+* `POST /api/users/create` → Register user
+* `GET /api/questions/getAll` → Fetch questions
+* `POST /api/tests/create` → Create test
+
+---
